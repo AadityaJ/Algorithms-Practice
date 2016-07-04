@@ -3,24 +3,24 @@
 class stack
 {
 	int size;
-	int arr[];
+	int arr[MAX_SIZE];
 public:
-	stack(){size=0;}
+	stack(){size=-1;}
 	void push(int);
 	int pop();
 	void display();
 };
 void stack::push(int item){
 	if(size==MAX_SIZE){printf("Stack Overflow\n");return;}
-	arr[size++]=item;
+	arr[++size]=item;
 }
 int stack::pop(){
-	if(size==0){printf("Stack underflow\n");return -1;}
-	return arr[--size];
+	if(size==-1){printf("Stack underflow\n");return -1;}
+	return arr[size--];
 }
 void stack::display(){
-	if(size==0){printf("Stack underflow\n");return;}
-	for(int i=0;i<size;i++){
+	if(size==-1){printf("Stack underflow\n");return;}
+	for(int i=0;i<=size;i++){
 		printf("%d\t",arr[i]);
 	}
 	printf("\n");
