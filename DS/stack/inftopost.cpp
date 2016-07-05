@@ -10,7 +10,7 @@ class stack
  		size=-1;}
  	void push(char);
  	char pop();
- 	bool isEmpty(){return size;}
+ 	bool isEmpty(){return !size;}
  };
  void stack::push(char a){
  	if(size==MAX_SIZE){printf("Stack overflow\n");return;}
