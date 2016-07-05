@@ -37,9 +37,13 @@ void printGreat(int *arr,int n){
         if(!st.isEmpty()){
 			int a= st.pop();
 			while(a<next){
-				
+				printf("%d --> %d \t",a,next);
+				if(st.isEmpty()) break;
+				a=st.pop();
 			}
+			if(a>next) st.push(a);
 		}
+		st.push(next);
 	}
     while(!st.isEmpty()){
         printf("%d --> -1\n",st.pop());
