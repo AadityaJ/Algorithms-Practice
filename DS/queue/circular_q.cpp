@@ -43,7 +43,7 @@ int main(int argc, char const *argv[]) {
         switch(sw){
             case 1: scanf("%d",&x);qu.enqueue(x);break;
             case 2: printf("%d\n",qu.dequeue());break;
-            case 3:qu.display();break;
+            case 3:qu.display();break;   
         }
     }
     return 0;
