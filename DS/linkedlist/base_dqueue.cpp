@@ -52,10 +52,10 @@ node* ll::delEnd(){
     if(!head &&!tail){
         // empty linked list
         printf("Empty linked list\n");
-        return 0;
+        return head;
     }
     node *curr=head;
-    while(curr->next==tail){
+    while(curr->next!=tail){
         curr=curr->next;
     }
     node *temp=new node;
@@ -86,8 +86,8 @@ int main(int argc, char const *argv[]) {
         switch (menu) {
             case 1:scanf("%d",&x);l.insertBeg(x);break;
             case 2:scanf("%d",&x);l.insertEnd(x);break;
-            case 3:temp=l.delBeg();printf("%d\n",temp->info);break;
-            case 4:temp=l.delEnd();printf("%d\n",temp->info);break;
+            case 3:temp=l.delBeg();(temp)?printf("Deleting :: %d\n",temp->info):printf(" ");break;
+            case 4:temp=l.delEnd();(temp)?printf("Deleting :: %d\n",temp->info):printf(" ");break;
             case 5:l.printAll();break;
         }
     }
