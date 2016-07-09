@@ -21,21 +21,21 @@ void ll::insertBeg(int x){
     node *temp=new node;
     temp->info=x;
     if(!head &&!tail){
-        headtemp;tail=temp;return;
-    }
+        head=temp;tail=temp;
+    }else{
     temp->next=head;
     head=temp;
-    delete(temp);
+    }
 }
 void ll::insertEnd(int x){
     node *temp=new node;
     temp->info=x;
     if(!head && !temp){
-        head=tail=temp;return;
-    }
+        head=tail=temp;
+    }else{
     tail->next=temp;
     temp->next=NULL;
-    delete(temp);
+  }
 }
 node* ll::delBeg(){
     node *temp=new node;
