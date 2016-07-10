@@ -17,6 +17,7 @@ public:
     node* delEnd();
     void printAll();
     void searchEle(int);
+    void invert();
 };
 void ll::insertBeg(int x){
     node *temp=new node;
@@ -82,7 +83,20 @@ void ll::searchEle(int x){
     }
     if(!count){printf("Not found\n");}
 }
-
+void ll::invert(){
+    if(!head) {printf("Empty list\n");return;}
+    node *p,*r,*q;
+    q=NULL;
+    p=head;
+    r=p->next;
+    while(p){
+        p->next=q;
+        q=p;
+        p=r;
+        r=r->next;
+    }
+    head=q;
+}
 
 int main(int argc, char const *argv[]) {
     ll l;
@@ -90,7 +104,7 @@ int main(int argc, char const *argv[]) {
     int menu=1;
     int x;
     while(menu){
-        printf("1.insertBeg 2.insertEnd 3.delBeg 4.delEnd 5.printAll 6.searchEle 0.exit\n");
+        printf("1.insertBeg 2.insertEnd 3.delBeg 4.delEnd 5.printAll 6.searchEle 7.invert 0.exit\n");
         scanf("%d",&menu);
         switch (menu) {
             case 1:scanf("%d",&x);l.insertBeg(x);break;
@@ -99,6 +113,7 @@ int main(int argc, char const *argv[]) {
             case 4:temp=l.delEnd();(temp)?printf("Deleting :: %d\n",temp->info):printf(" ");break;
             case 5:l.printAll();break;
             case 6:scanf("%d",&x);l.searchEle(x);break;
+            case 7:l.invert();break;
         }
     }
     return 0;
