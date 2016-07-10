@@ -74,13 +74,13 @@ void ll::printAll(){
     printf("\n");
 }
 void ll::searchEle(int x){
-    int pos=count=0;
+    int pos=0,count=0;
     node *temp = head;
     for(;temp;temp=temp->next){
-        if(temp->info==x){count++;}
+        if(temp->info==x){count++;printf("At pos %d\n",pos+1);}
         pos++;
     }
-    
+    if(!count){printf("Not found\n");}
 }
 
 
@@ -90,7 +90,7 @@ int main(int argc, char const *argv[]) {
     int menu=1;
     int x;
     while(menu){
-        printf("1.insertBeg 2.insertEnd 3.delBeg 4.delEnd 5.printAll 0.exit\n");
+        printf("1.insertBeg 2.insertEnd 3.delBeg 4.delEnd 5.printAll 6.searchEle 0.exit\n");
         scanf("%d",&menu);
         switch (menu) {
             case 1:scanf("%d",&x);l.insertBeg(x);break;
@@ -98,6 +98,7 @@ int main(int argc, char const *argv[]) {
             case 3:temp=l.delBeg();(temp)?printf("Deleting :: %d\n",temp->info):printf(" ");break;
             case 4:temp=l.delEnd();(temp)?printf("Deleting :: %d\n",temp->info):printf(" ");break;
             case 5:l.printAll();break;
+            case 6:scanf("%d",&x);l.searchEle(x);break;
         }
     }
     return 0;
