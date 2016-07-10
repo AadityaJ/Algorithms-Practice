@@ -88,12 +88,11 @@ void ll::invert(){
     node *p,*r,*q;
     q=NULL;
     p=head;
-    r=p->next;
     while(p){
+        r=p->next;
         p->next=q;
         q=p;
         p=r;
-        r=r->next;
     }
     head=q;
 }
