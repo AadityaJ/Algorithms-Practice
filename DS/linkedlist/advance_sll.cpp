@@ -105,9 +105,12 @@ int ll::lenList(node *curr,int len){
 }
 /*  Recursive > Iterative ... Shorts fired
 int ll::lenList(node *curr,int len){
-    
-
-
+    len=0;
+    while(curr){
+    curr=curr->next;
+    len++;
+    }
+    return len;
 }
 */
 int main(int argc, char const *argv[]) {
