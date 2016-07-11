@@ -7,17 +7,19 @@ struct node{
     node* next;
 };
 class ll{
+public:
     node *head;
     node *tail;
-public:
     ll(){head=tail=NULL;}
     void insertBeg(int);
     void insertEnd(int);
     node* delBeg();
     node* delEnd();
+    node* getHead(){return head;}
     void printAll();
     void searchEle(int);
     void invert();
+    int lenList(node *curr,int len);
 };
 void ll::insertBeg(int x){
     node *temp=new node;
@@ -96,14 +98,25 @@ void ll::invert(){
     }
     head=q;
 }
+int ll::lenList(node *curr,int len){
+    if(!curr) return len;
+    curr=curr->next;
+    return lenList(curr,len+1);
+}
+/*  Recursive > Iterative ... Shorts fired
+int ll::lenList(node *curr,int len){
+    
 
+
+}
+*/
 int main(int argc, char const *argv[]) {
     ll l;
     node *temp;
     int menu=1;
     int x;
     while(menu){
-        printf("1.insertBeg 2.insertEnd 3.delBeg 4.delEnd 5.printAll 6.searchEle 7.invert 0.exit\n");
+        printf("1.insertBeg 2.insertEnd 3.delBeg 4.delEnd 5.printAll 6.searchEle 7.invert 8.lenList 0.exit\n");
         scanf("%d",&menu);
         switch (menu) {
             case 1:scanf("%d",&x);l.insertBeg(x);break;
@@ -113,6 +126,7 @@ int main(int argc, char const *argv[]) {
             case 5:l.printAll();break;
             case 6:scanf("%d",&x);l.searchEle(x);break;
             case 7:l.invert();break;
+            case 8:x=l.lenList(l.getHead(),0);printf("Length is :: %d\n",x);break;
         }
     }
     return 0;
