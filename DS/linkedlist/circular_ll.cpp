@@ -15,6 +15,8 @@ public:
     node* delBeg();
     node* delEnd();
     void printAll();
+    node *split();
+    void makeHead(node* head){this->head=head;}
 };
 void c_ll::insertBeg(int x){
     node *temp=new node;
@@ -105,16 +107,32 @@ void c_ll::printAll(){
 
     printf("\n");
 }
-
+node* c_ll::split(){
+    if(!head || head->next==head){printf("Not possible\n");return head;}
+    node *hare,*tort;
+    hare=tort=head;
+    while((hare->next)!=head || (hare->next)->next!=head){
+        tort=tort->next;
+        hare=(hare->next)->next;
+    }
+    node *prev=NULL;
+    if((hare->next)->next==head){hare=hare->next;}
+    node *head2;
+    head2=tort->next;
+    hare->next=head2;
+    tort->next=head;
+    return head2;
+}
 
 
 int main(int argc, char const *argv[]) {
     c_ll l;
+    c_ll ot;
     node *temp;
     int menu=1;
     int x;
     while(menu){
-        printf("1.insertBeg 2.insertEnd 3.delBeg 4.delEnd 5.printAll 0.exit\n");
+        printf("1.insertBeg 2.insertEnd 3.delBeg 4.delEnd 5.printAll 6.split 0.exit\n");
         scanf("%d",&menu);
         switch (menu) {
             case 1:scanf("%d",&x);l.insertBeg(x);break;
@@ -122,6 +140,7 @@ int main(int argc, char const *argv[]) {
             case 3:temp=l.delBeg();(temp)?printf("Deleting :: %d\n",temp->info):printf(" ");break;
             case 4:temp=l.delEnd();(temp)?printf("Deleting :: %d\n",temp->info):printf(" ");break;
             case 5:l.printAll();break;
+            case 6:temp=l.split();ot.makeHead(temp);ot.printAll();break;
         }
     }
     return 0;
