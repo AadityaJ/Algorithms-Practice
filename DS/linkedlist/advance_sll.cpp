@@ -19,6 +19,7 @@ public:
     void printAll();
     void searchEle(int);
     void invert();
+    void invert_len(int);
     int lenList(node *curr,int len);
 };
 void ll::insertBeg(int x){
@@ -98,6 +99,22 @@ void ll::invert(){
     }
     head=q;
 }
+void ll::invert_len(int len){
+    if(!head){printf("Empty list\n");return;}
+    node *p,*r,*q;
+    // invert from 0 to len-1
+    int count=len;
+    q=NULL;
+    p=head;
+    while(count--){
+        r=p->next;
+        p->next=q;
+        q=p;
+        p=r;
+    }
+    head->next=p;
+    head=q;
+}
 int ll::lenList(node *curr,int len){
     if(!curr) return len;
     curr=curr->next;
@@ -119,7 +136,7 @@ int main(int argc, char const *argv[]) {
     int menu=1;
     int x;
     while(menu){
-        printf("1.insertBeg 2.insertEnd 3.delBeg 4.delEnd 5.printAll 6.searchEle 7.invert 8.lenList 0.exit\n");
+        printf("1.insertBeg 2.insertEnd 3.delBeg 4.delEnd 5.printAll 6.searchEle 7.invert 8.lenList 9.invertLen 0.exit\n");
         scanf("%d",&menu);
         switch (menu) {
             case 1:scanf("%d",&x);l.insertBeg(x);break;
@@ -130,6 +147,7 @@ int main(int argc, char const *argv[]) {
             case 6:scanf("%d",&x);l.searchEle(x);break;
             case 7:l.invert();break;
             case 8:x=l.lenList(l.getHead(),0);printf("Length is :: %d\n",x);break;
+            case 9:scanf("%d",&x);l.invert_len(x);break;
         }
     }
     return 0;
