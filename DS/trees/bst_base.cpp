@@ -23,7 +23,15 @@ public:
     int badCalcDiam(node *);
     int calcDiam(node *,int *);
     void morrisInorder();
+    node *cloneTree(node *rt);
 };
+node *bst_tree::cloneTree(node *rt){
+    if(!rt){return rt;}
+    node *r = rt;
+    r->lcl=cloneTree(rt->lcl);
+    r->rcl=cloneTree(rt->rcl);
+    return r;
+}
 void bst_tree::morrisInorder(){
     if(!root) return;
     node *curr=root;
@@ -124,11 +132,11 @@ void bst_tree::levelorder(){
 }
 int main(int argc, char const *argv[]) {
     bst_tree l;
-    node *temp;
+    node* temp;
     int menu=1;
     int x;
     while(menu){
-        printf("\n1.insert 2.preorder 3.inorder 4.postorder 5.levelorder 6.calcHeight 7.CalcDiam 8.morrisInorder 0.exit\n");
+        printf("\n1.insert 2.preorder 3.inorder 4.postorder 5.levelorder 6.calcHeight 7.CalcDiam 8.morrisInorder 9.createTree 0.exit\n");
         scanf("%d",&menu);
         switch (menu) {
             case 1:scanf("%d",&x);l.createTree(x);break;
@@ -139,6 +147,7 @@ int main(int argc, char const *argv[]) {
             case 6:printf("%d\n",l.calcHeight(l.getRoot()));break;
             case 7:printf("%d\n",l.badCalcDiam(l.getRoot()));break;
             case 8:l.morrisInorder();break;
+            case 9:temp=l.cloneTree(l.getRoot());l.inorder(temp);break;
         }
     }
     return 0;
