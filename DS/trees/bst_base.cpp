@@ -1,6 +1,10 @@
 #include <stdio.h>
 #include <queue>
 using namespace std;
+
+inline int max(int a,int b){
+    return (a>b)?a:b;
+}
 struct node{
     int data;
     node *lcl;
@@ -9,13 +13,69 @@ struct node{
 class bst_tree{
     node *root;
 public:
-    node *getRoot(){return root;}  //getRoot!=groot
+    node *getRoot(){return root;}  //<poor joke> getRoot!=groot </poor joke>
     void inorder(node *);
     void postorder(node *);
     void preorder(node*);
     void createTree(int);
     void levelorder();
+    int calcHeight(node *);
+    int badCalcDiam(node *);
+    int calcDiam(node *,int *);
+    void morrisInorder();
 };
+void bst_tree::morrisInorder(){
+    if(!root) return;
+    node *curr=root;
+    while(curr){
+        if(!curr->lcl){
+            printf("%d ",curr->data);
+            curr=curr->rcl;
+        }
+        else{
+            node *pre=curr->lcl;
+            while(pre->rcl && pre->rcl!=curr) pre=pre->rcl;
+            if(!pre->rcl){
+                pre->rcl=curr;
+                curr=curr->lcl;
+            }
+            else{
+                pre->rcl=NULL;
+                printf("%d ",curr->data);
+                curr=curr->rcl;
+            }
+        }
+    }
+}
+int bst_tree::calcDiam(node *rt,int *ht){
+    if(!rt){*ht=0;return 0;}
+
+    int lh=0,rh=0;
+
+    int ldiam=0,rdiam=0;
+
+    ldiam=calcDiam(rt->lcl,&lh);
+    rdiam=calcDiam(rt->rcl,&rh);
+
+    return max(1+lh+rh,max(ldiam,rdiam));
+
+}
+int bst_tree::badCalcDiam(node *rt){
+    if(!rt)return 0;
+
+    int lheight=calcHeight(rt->lcl);
+    int rheight=calcHeight(rt->rcl);
+
+    int ldiam=badCalcDiam(rt->lcl);
+    int rdiam=badCalcDiam(rt->rcl);
+
+    return max(lheight+rheight+1,max(ldiam,rdiam));
+}
+int bst_tree::calcHeight(node *rt){
+    if(!rt) return 0;
+
+    return 1+max(calcHeight(rt->lcl),calcHeight(rt->rcl));
+}
 void bst_tree::createTree(int x){
     node *temp=new node;
     temp->data=x;
@@ -68,7 +128,7 @@ int main(int argc, char const *argv[]) {
     int menu=1;
     int x;
     while(menu){
-        printf("\n1.insert 2.preorder 3.inorder 4.postorder 5.levelorder 0.exit\n");
+        printf("\n1.insert 2.preorder 3.inorder 4.postorder 5.levelorder 6.calcHeight 7.CalcDiam 8.morrisInorder 0.exit\n");
         scanf("%d",&menu);
         switch (menu) {
             case 1:scanf("%d",&x);l.createTree(x);break;
@@ -76,6 +136,9 @@ int main(int argc, char const *argv[]) {
             case 3:l.inorder(l.getRoot());break;
             case 4:l.postorder(l.getRoot());break;
             case 5:l.levelorder();break;
+            case 6:printf("%d\n",l.calcHeight(l.getRoot()));break;
+            case 7:printf("%d\n",l.badCalcDiam(l.getRoot()));break;
+            case 8:l.morrisInorder();break;
         }
     }
     return 0;
