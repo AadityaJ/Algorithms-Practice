@@ -24,7 +24,15 @@ public:
     int calcDiam(node *,int *);
     void morrisInorder();
     node *cloneTree(node *rt);
+    bool printAnces(node *,int);
+    int findLowesAnces(node*,int,int);
 };
+bool bst_tree::printAnces(node *rt,int x){
+    if(!rt)return 0;
+    if(rt->data==x) return 1;
+    if(printAnces(rt->lcl,x)||printAnces(rt->rcl,x)) {printf("%d ",rt->data);return 1;}
+    return 0;
+}
 node *bst_tree::cloneTree(node *rt){
     if(!rt){return rt;}
     node *r = rt;
@@ -130,13 +138,23 @@ void bst_tree::levelorder(){
 
     }
 }
+int bst_tree::findLowesAnces(node *rt,int a,int b){
+    if(!rt)return -1;
+    if(rt->data>a&&rt->data>b){
+        return findLowesAnces(rt->lcl,a,b);
+    }
+    if(rt->data<a&&rt->data<b){
+        return findLowesAnces(rt->rcl,a,b);
+    }
+    return root->data;
+}
 int main(int argc, char const *argv[]) {
     bst_tree l;
     node* temp;
     int menu=1;
-    int x;
+    int x,y;
     while(menu){
-        printf("\n1.insert 2.preorder 3.inorder 4.postorder 5.levelorder 6.calcHeight 7.CalcDiam 8.morrisInorder 9.createTree 0.exit\n");
+        printf("\n1.insert 2.preorder 3.inorder 4.postorder 5.levelorder 6.calcHeight 7.CalcDiam 8.morrisInorder 9.createTree 10.printAnces  11.findLowesAnces 0.exit\n");
         scanf("%d",&menu);
         switch (menu) {
             case 1:scanf("%d",&x);l.createTree(x);break;
@@ -148,6 +166,8 @@ int main(int argc, char const *argv[]) {
             case 7:printf("%d\n",l.badCalcDiam(l.getRoot()));break;
             case 8:l.morrisInorder();break;
             case 9:temp=l.cloneTree(l.getRoot());l.inorder(temp);break;
+            case 10:scanf("%d",&x);if(!l.printAnces(l.getRoot(),x)){printf("Not found\n");};break;
+            case 11:scanf("%d %d",&x,&y);printf("%d\n",l.findLowesAnces(l.getRoot(),x,y));break;
         }
     }
     return 0;
