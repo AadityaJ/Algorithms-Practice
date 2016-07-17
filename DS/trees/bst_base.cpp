@@ -145,7 +145,7 @@ int bst_tree::findLowesAnces(node *rt,int a,int b){
     }
     if(rt->data<a&&rt->data<b){
         return findLowesAnces(rt->rcl,a,b);
-    }
+    }  
     return root->data;
 }
 int main(int argc, char const *argv[]) {
