@@ -1,17 +1,16 @@
 #include <stdio.h>
-#include <vector>
-#include <queue>
+#include <list>
 #define MAX 100
 using namespace std;
 class graph{
-    vector <int> g[MAX];
+    list <int> g[MAX];
     int edge;
     int vertices;
 public:
     graph(int edge,int vertices){this->edge=edge;this->vertices=vertices;}
     void insert();
     //void dfs;
-    void bfs();
+    void bfs(int s);
 };
 void graph::insert(){
     int a,b;
@@ -22,16 +21,29 @@ void graph::insert(){
         g[b].push_back(a);
     }
 }
-void graph::bfs(){
-    queue <int> q;
-    g[0]
-
+void graph::bfs(int s){
+    list <int> q;
+    bool *visited = new bool[vertices];
+    visited[s]=1;
+    q.push_back(s);
+    list<int>::iterator i;
+    while(!q.empty()){
+        s=q.front();
+        printf("%d\n",s);
+        q.pop_front();
+        for(i=g[s].begin();i!=g[s].end();i++){
+            if(!visited[*i]){
+                q.push_back(*i);
+                visited[*i]=1;
+            }
+        }
+    }
 }
 int main(int argc, char const *argv[]) {
     int edges,vertices;
     scanf("%d %d",&edges,&vertices);
     graph G(edges,vertices);
     G.insert();
-
+    G.bfs(1);
     return 0;
 }
