@@ -1,15 +1,17 @@
 #include <stdio.h>
-#include <list>
+#include <queue>
+#include <vector>
 #define MAX 100
 using namespace std;
 class graph{
-    list <int> g[MAX];
+    vector <int> g[MAX];
     int edge;
     int vertices;
 public:
     graph(int edge,int vertices){this->edge=edge;this->vertices=vertices;}
     void insert();
-    //void dfs;
+    void dfs_util(int s,bool visited[]);
+    void dfs(int s);
     void bfs(int s);
 };
 void graph::insert(){
@@ -21,20 +23,37 @@ void graph::insert(){
         g[b].push_back(a);
     }
 }
+void graph::dfs_util(int s,bool visited[]){
+    visited[s]=1;
+    printf("%d\t",s);
+    for(int i=0;i<g[i].size();i++){
+        if(!visited[g[s][i]]){
+            dfs_util(g[s][i],visited);
+        }
+    }
+}
+void graph::dfs(int s){
+    bool *visited = new bool[vertices];
+    for(int i=0;i<vertices;i++){
+        visited[i]=0;
+    }
+    dfs_util(s,visited);
+}
 void graph::bfs(int s){
-    list <int> q;
+    queue <int> q;
     bool *visited = new bool[vertices];
     visited[s]=1;
-    q.push_back(s);
-    list<int>::iterator i;
+    q.push(s);
+    //list<int>::iterator i;
     while(!q.empty()){
         s=q.front();
         printf("%d\n",s);
-        q.pop_front();
-        for(i=g[s].begin();i!=g[s].end();i++){
-            if(!visited[*i]){
-                q.push_back(*i);
-                visited[*i]=1;
+        q.pop();
+        for(int i=0;i!=g[s].size();i++){
+            int x=g[s][i];
+            if(!visited[x]){
+                q.push(x);
+                visited[x]=1;
             }
         }
     }
@@ -44,6 +63,7 @@ int main(int argc, char const *argv[]) {
     scanf("%d %d",&edges,&vertices);
     graph G(edges,vertices);
     G.insert();
-    G.bfs(1);
+    //G.bfs(2);
+    G.dfs(2);
     return 0;
 }
