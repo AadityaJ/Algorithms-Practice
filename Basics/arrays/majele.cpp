@@ -9,10 +9,18 @@ int findCand(int arr[],int n){
             count=1;maj_ele=i;
         }
     }
-    return isMaj(arr[maj_ele],arr,n);
+    return arr[maj_ele];//isMaj(arr[maj_ele],arr,n);
 }
-int isMaj(int x,int arr[],int size)
+/*int isMaj(int x,int arr[],int size){
+    int count=0;
+    for(int i=0;i<size;i++){
+        if(arr[i]==x) count++;
+    }
+
+}*/
 int main(int argc, char const *argv[]) {
     int arr[]={3,3,4,2,4,4,2,4,4};
+    int n=9;
+    printf("%d\n",findCand(arr,n));
     return 0;
 }
