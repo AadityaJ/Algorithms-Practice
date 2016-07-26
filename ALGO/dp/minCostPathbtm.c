@@ -1,4 +1,5 @@
 //http://www.geeksforgeeks.org/dynamic-programming-set-6-min-cost-path/
+//bottom up version
 #include <stdio.h>
 #include <limits.h>
 inline int min(int a,int b,int c){
@@ -13,12 +14,16 @@ void init(int a){
     }
     count=0;
 }
-int minCostPath(int arr[3][3],int n,int i,int j){
-    if(i<0 || j<0) return INT_MAX;
-    if(dp[i][j]!=-1) return dp[i][j];
-    if(i==0 && j==0) return dp[i][j]=arr[i][j];
-    count++;
-    return dp[i][j]=arr[i][j]+min(minCostPath(arr,n,i-1,j),minCostPath(arr,n,i,j-1),minCostPath(arr,n,i-1,j-1));
+int minCostPath(int arr[3][3],int n){
+    dp[0][0]=arr[0][0];
+    for(int i=1;i<=n;i++) dp[i][0]=dp[i-1][0]+arr[i][0];
+    for(int i=1;i<=n;i++) dp[0][i]=dp[0][i-1]+arr[0][i];
+    for(int i=1;i<=n;i++){
+        for(int j=1;j<=n;j++){
+            dp[i][j]=min(dp[i-1][j],dp[i-1][j-1],dp[i][j-1])+arr[i][j];
+        }
+    }
+    return dp[n][n];
 }
 int main(int argc, char const *argv[]) {
     //r=c=3;
@@ -27,7 +32,7 @@ int main(int argc, char const *argv[]) {
     int cost[3][3] = { {1, 2, 3},
                        {4, 8, 2},
                        {1, 5, 3} };
-    printf("%d\n",minCostPath(cost,2,2,2));
+    printf("%d\n",minCostPath(cost,2));
     printf("%d\n",count);
     for(int i=0;i<3;i++){
         for(int j=0;j<3;j++) printf("%d ",dp[i][j]);
