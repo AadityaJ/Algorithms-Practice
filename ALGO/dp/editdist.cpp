@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include <iostream>
 #include <string>
 #define MAX 1000
 using namespace std;
@@ -22,10 +22,19 @@ int lcs(string str1,string str2,int i,int j){
     return dp[i][j]=max(lcs(str1,str2,i+1,j),lcs(str1,str2,i,j+1));
 }
 int main(int argc, char const *argv[]) {
-    string x="cat";
-    string y="cut";
-    init(x.length(),y.length());
-    printf("%d\n",lcs(x,y,0,0));
+    int t;
+    cin>>t;
+    while(t--){
+        string x;
+        string y;
+        int a,b;
+        cin>>a;
+        cin>>b;
+        cin>>x;
+        cin>>y;
+        init(x.length(),y.length());
+        cout<<max(x.length(),y.length())-lcs(x,y,0,0);
+    }
     //printf("%d\n",counter);
     return 0;
 }
