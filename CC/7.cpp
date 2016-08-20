@@ -4,6 +4,12 @@ using namespace std;
 inline int max3(int a,int b,int c){
     return (a>b)?((a>c)?a:c):((b>c)?b:c);
 }
+int mem[101][101];
+void init(){
+    for(int i=0;i<101;i++){
+        for(int j=0;j<101;j++) mem[i][j]=-1;
+    }
+}
 int dp(string str1,string str2,int aux,int i,int j,int count,int k){
     if(str1.length()==i || str2.length()==j){
         //cout<<i<<" "<<j<<" "<<count<<endl;
@@ -12,9 +18,10 @@ int dp(string str1,string str2,int aux,int i,int j,int count,int k){
         }
         else return 0;
     }
-    if(str1[i]==str2[j]) return max3(dp(str1,str2,aux+(int)str1[i],i+1,j+1,count+1,k),dp(str1,str2,aux,i+1,j,count,k),dp(str1,str2,aux,i,j+1,count,k));
+    if(mem[i][j]!=-1) return mem[i][j]; 
+    if(str1[i]==str2[j]) return mem[i][j]=max3(dp(str1,str2,aux+(int)str1[i],i+1,j+1,count+1,k),dp(str1,str2,aux,i+1,j,count,k),dp(str1,str2,aux,i,j+1,count,k));
 
-    else return max(dp(str1,str2,aux,i+1,j,count,k),dp(str1,str2,aux,i,j+1,count,k));
+    else return mem[i][j]=max(dp(str1,str2,aux,i+1,j,count,k),dp(str1,str2,aux,i,j+1,count,k));
 
 }
 int main(int argc, char const *argv[]) {
