@@ -11,6 +11,6 @@ int main(int argc, char const *argv[]){
 		cin>>n;
 		int arr[n];
 
-	} 
+	}
 	return 0;
 }
