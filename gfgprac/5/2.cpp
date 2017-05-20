@@ -12,5 +12,5 @@ int main(int argc, char const *argv[]){
 		int arr[n];
 
 	}
-	return 0;
+	r eturn 0;
 }
