@@ -20,9 +20,8 @@ int main(int argc, char const *argv[]){
 			for(int x=0;x<i;x++){
 				hash[x-'a']++;
 			}
-			for(int x=i-1;x<n.length();x++){
+			for(int x=i-1;x<=n.length();x++){
 				hash[x-'a']=1;
-
 			}
 		}
 	}
