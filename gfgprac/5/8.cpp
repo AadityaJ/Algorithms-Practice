@@ -16,7 +16,6 @@ int calc(string s)
 		else if (s[i] == 'c')
 			cCount = (bCount + 2 * cCount);
 	}
-
 	return cCount;
 }
 int main(int argc, char const *argv[]){
