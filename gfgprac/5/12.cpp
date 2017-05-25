@@ -9,7 +9,7 @@ int calc(int n,int k,int *arr,int sum){
 	for(int i=0;i<n;i++){
 		x+=calc(n,k,arr,sum+arr[i]);
 	}
-	return x; 
+	return x;
 }
 int main(int argc, char const *argv[]){
 	int t;
