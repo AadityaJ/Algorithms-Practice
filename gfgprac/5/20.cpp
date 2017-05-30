@@ -3,21 +3,41 @@
 #include <vector>
 #include <algorithm>
 using namespace std;
-bool isDone[51];
-int calc(int *arr,int n,int i,int *s,int k){
-	if(i==n){
-		int mx=0;
-		for(int ix=0;ix<k;ix++) mx=max(mx,s[ix]);
-		cout<<mx<<endl;
-		return mx;
-	}
-	int mx=0;
-	for(int j=0;j<k;j++){
-		s[j]+=arr[i];
-		mx=min(mx,calc(arr,n,i+1,s,k));
-		s[j]-=arr[i];
-	}
-	return mx;
+bool isPossible(int arr[], int n, int m, int curr_min){
+    int studentsRequired = 1;
+    int curr_sum = 0;
+    for (int i = 0; i < n; i++){
+        if (arr[i] > curr_min)
+            return false;
+        if (curr_sum + arr[i] > curr_min){
+            studentsRequired++;
+            curr_sum = arr[i];
+            if (studentsRequired > m)
+                return false;
+        }
+        else
+            curr_sum += arr[i];
+    }
+    return true;
+}
+int findPages(int arr[], int n, int m){
+    long long sum = 0;
+    if (n < m)
+        return -1;
+    for (int i = 0; i < n; i++)
+        sum += arr[i];
+    int start = 0, end = sum;
+    int result = INT_MAX;
+    while (start <= end){
+        int mid = (start + end) / 2;
+        if (isPossible(arr, n, m, mid)){
+            result = min(result, mid);
+            end = mid - 1;
+        }
+        else
+            start = mid + 1;
+    }
+    return result;
 }
 int main(int argc, char const *argv[]){
 	int t;
@@ -29,9 +49,7 @@ int main(int argc, char const *argv[]){
 		for(int i=0;i<n;i++) cin>>arr[i];
 		int k;
 		cin>>k;
-		int s[k];
-		for(int i=0;i<k;i++) s[i]=0;
-		cout<<calc(arr,n,0,s,k)<<endl;
+		cout<<findPages(arr,n,k)<<endl;
 	}
 	return 0;
 }
