@@ -1,23 +1,26 @@
 #include <bits/stdc++.h>
 using namespace std;
-int dp(int *arr,int i,int n,int sum,int sf){
-	if(i==n){
-		int x=sum-sf;
-		return abs(x-sf);
-	}
-
-	return min(dp(arr,i+1,n,sum,sf+arr[i]),dp(arr,i+1,n,sum,sf));
-}
 int main(int argc, char const *argv[]){
 	int t;
 	cin>>t;
 	while(t--){
 		int n;
 		cin>>n;
-		int sum=0;
+		int mn=INT_MAX;
 		int arr[n];
-		for(int i=0;i<n;i++) {cin>>arr[i]; sum+=arr[i];}
-		cout<<dp(arr,0,n,sum,0)<<endl;
+		bool mp[n];
+		for(int i=0;i<n;i++) mp[i]=0;
+		for(int i=0;i<n;i++) {cin>>arr[i];mn=min(mn,arr[i]);}
+		bool is=1;
+		for(int i=0;i<n;i++){
+			if(mp[(arr[i]-mn)]==1){is=0;break;}
+			mp[arr[i]-mn]=1;
+		}
+		//if(!is) cout<<is<<continue;
+		for(int i=0;i<n;i++){
+			if(mp[i]!=1){is=0;break;}
+		}
+		cout<<is<<endl;
 	}
 	return 0;
 }
