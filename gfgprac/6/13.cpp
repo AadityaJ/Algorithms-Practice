@@ -24,6 +24,7 @@ int main(int argc, char const *argv[]){
 		}
 		while(temp>=0) arr[temp--]=1;
 		for(int i=0;i<n;i++) cout<<arr[i]<<" ";
+		cout<<endl;
 	}
 	return 0;
 }
