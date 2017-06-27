@@ -127,6 +127,22 @@ public:
 
         return find(val,t->next,pos+1);
     }
+    void reverse(){
+        if(!head) return ;
+        if(!head->next) return ;
+        tail=head;
+        Node *p,*q,*r;
+        p=head;
+        q=0;
+        r=p->next;
+        while(p){
+            r=p->next;
+            p->next=q;
+            q=p;
+            p=r;
+        }
+        head=q;
+    }
 };
 void test1(){
     cout<<"**********TEST 1**********\n";
@@ -169,6 +185,9 @@ void test3(){
     cout<<obj.find(10,obj.getHead())<<endl;
     cout<<obj.find(100,obj.getHead())<<endl;
     cout<<obj.find(2,obj.getHead())<<endl;
+    obj.print();
+    obj.reverse();
+    obj.print();
 }
 int main(int argc, char const *argv[]) {
     test1();
