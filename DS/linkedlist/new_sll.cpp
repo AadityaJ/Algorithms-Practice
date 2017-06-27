@@ -8,6 +8,10 @@ struct Node{
         this->data=data;
         this->next=next;
     }
+    Node(Node *temp){
+        this->data=temp->data;
+        this->next=temp->next;
+    }
 };
 class SLL{
     Node *head;
@@ -38,12 +42,43 @@ public:
     };
     void print(){
         Node *curr=head;
-        while(curr){
+        while(curr!=tail->next){
             cout<<curr->data<<" ";
             curr=curr->next;
         }
         cout<<endl;
         return ;
+    }
+    int pop_back(){
+        if(!head &&!tail) return -1;
+        if(head==tail){
+            int x=head->data;
+            head=tail=0;
+            return x;
+        }
+        Node *temp=new Node(tail);
+        int x=temp->data;
+        Node *curr=head;
+        while(curr->next!=tail){
+            curr=curr->next;
+        }
+        curr->next=0;
+        tail=curr;
+        delete temp;
+        return x;
+    }
+    int pop_front(){
+        if(!head) return -1;
+        if(head==tail){
+            int x=head->data;
+            head=tail=0;
+            return x;
+        }
+        Node *temp=new Node(head);
+        head=head->next;
+        int x=temp->data;
+        delete temp;
+        return x;
     }
 };
 void test1(){
@@ -53,6 +88,12 @@ void test1(){
     obj.push_back(3);
     obj.push_front(10);
     obj.push_front(20);
+    obj.print();
+    cout<<obj.pop_back()<<" ";
+    cout<<obj.pop_back()<<" ";
+    cout<<obj.pop_back()<<" ";
+    cout<<obj.pop_front()<<" ";
+    cout<<endl;
     obj.print();
 }
 int main(int argc, char const *argv[]) {
