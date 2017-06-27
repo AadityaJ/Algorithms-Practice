@@ -21,6 +21,7 @@ public:
     SLL(){
         head=tail=NULL;
     }
+    Node *getHead(){return this->head;}
     void push_back(int x){
         Node *temp=new Node(x,NULL);
         if(!head && !tail){
@@ -120,6 +121,12 @@ public:
         delete temp;
         return ;
     }
+    int find(int val,Node *t,int pos=0){
+        if(t==NULL) return -1;
+        if(t->data==val) return pos;
+
+        return find(val,t->next,pos+1);
+    }
 };
 void test1(){
     cout<<"**********TEST 1**********\n";
@@ -150,8 +157,22 @@ void test2(){
     obj.del_mid(0);
     obj.print();
 }
+void test3(){
+    cout<<"\n**********TEST 3**********\n";
+    SLL obj;
+    obj.push_back(1);
+    obj.push_back(2);
+    obj.push_back(3);
+    obj.push_front(10);
+    obj.push_front(20);
+    obj.print();
+    cout<<obj.find(10,obj.getHead())<<endl;
+    cout<<obj.find(100,obj.getHead())<<endl;
+    cout<<obj.find(2,obj.getHead())<<endl;
+}
 int main(int argc, char const *argv[]) {
     test1();
     test2();
+    test3();
     return 0;
 }
