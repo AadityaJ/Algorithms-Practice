@@ -80,8 +80,22 @@ public:
         delete temp;
         return x;
     }
+    void enter_mid(int val,int pos){
+        if(pos==0){this->push_front(val);return;}
+
+        int x=pos;
+        Node *curr=head;
+        while(x--!=1){
+            curr=curr->next;
+        }
+        Node *temp=new Node(val,curr->next);
+
+        curr->next=temp;
+        return;
+    }
 };
 void test1(){
+    cout<<"**********TEST 1**********\n";
     SLL obj;
     obj.push_back(1);
     obj.push_back(2);
@@ -93,10 +107,22 @@ void test1(){
     cout<<obj.pop_back()<<" ";
     cout<<obj.pop_back()<<" ";
     cout<<obj.pop_front()<<" ";
-    cout<<endl;
+}
+void test2(){
+    cout<<"\n**********TEST 2**********\n";
+    SLL obj;
+    obj.push_back(1);
+    obj.push_back(2);
+    obj.push_back(3);
+    obj.push_front(10);
+    obj.push_front(20);
     obj.print();
+    obj.enter_mid(20,0);
+    obj.print();
+
 }
 int main(int argc, char const *argv[]) {
     test1();
+    test2();
     return 0;
 }
