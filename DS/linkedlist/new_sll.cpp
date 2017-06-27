@@ -88,10 +88,33 @@ public:
         while(x--!=1){
             curr=curr->next;
         }
+        if(!curr->next){this->push_back(val);return ;}
         Node *temp=new Node(val,curr->next);
 
         curr->next=temp;
         return;
+    }
+    int get_mid(int pos){
+        if(pos==0){return head->data;}
+
+        int x=pos;
+        Node *curr=head;
+        while(curr&&x--){
+            curr=curr->next;
+        }
+        if(!curr) return -1;
+        return curr->data;
+    }
+    int get_mid(int pos){
+        if(pos==0){return head->data;}
+
+        int x=pos;
+        Node *curr=head;
+        while(curr&&x--){
+            curr=curr->next;
+        }
+        if(!curr) return -1;
+        return curr->data;
     }
 };
 void test1(){
@@ -117,9 +140,9 @@ void test2(){
     obj.push_front(10);
     obj.push_front(20);
     obj.print();
-    obj.enter_mid(20,0);
+    obj.enter_mid(20,5);
     obj.print();
-
+    cout<<obj.get_mid(6)<<endl;
 }
 int main(int argc, char const *argv[]) {
     test1();
