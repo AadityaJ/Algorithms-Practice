@@ -105,16 +105,20 @@ public:
         if(!curr) return -1;
         return curr->data;
     }
-    int get_mid(int pos){
-        if(pos==0){return head->data;}
+    void del_mid(int pos){
+        if(pos==0){this->pop_front();return;}
 
         int x=pos;
         Node *curr=head;
-        while(curr&&x--){
+        while(curr&&x--!=1){
             curr=curr->next;
         }
-        if(!curr) return -1;
-        return curr->data;
+        if(!curr) return ;
+        if(!curr->next) {curr->next=NULL;tail=curr;return;}
+        Node *temp=new Node(curr->next);
+        curr->next=(curr->next)->next;
+        delete temp;
+        return ;
     }
 };
 void test1(){
@@ -142,7 +146,9 @@ void test2(){
     obj.print();
     obj.enter_mid(20,5);
     obj.print();
-    cout<<obj.get_mid(6)<<endl;
+    cout<<obj.get_mid(5)<<endl;
+    obj.del_mid(0);
+    obj.print();
 }
 int main(int argc, char const *argv[]) {
     test1();
