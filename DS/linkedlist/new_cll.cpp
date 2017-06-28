@@ -107,10 +107,10 @@ public:
 
         int x=pos;
         Node *curr=head;
-        while(curr&&x--){
+        while(curr->next!=head&&x--){
             curr=curr->next;
         }
-        if(!curr) return -1;
+        if(curr->next!=head) return -1;
         return curr->data;
     }
     void del_mid(int pos){
