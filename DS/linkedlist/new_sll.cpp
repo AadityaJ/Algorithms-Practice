@@ -170,6 +170,7 @@ public:
             curr->next=temp;
             curr=temp->next;
         }
+        //cout<<curr->data;
     }
 };
 void test1(){
