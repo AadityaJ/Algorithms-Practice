@@ -1,4 +1,5 @@
 #include <iostream>
+#include <stack>
 using namespace std;
 struct Node{
     int data;
@@ -143,6 +144,33 @@ public:
         }
         head=q;
     }
+    void doAlt(){
+        if(!head) return ;
+        stack<Node*> st;
+        Node *curr=head;
+        int i=0;
+        while(curr){
+            curr=curr->next;
+            i++;
+        }
+        int size=i;
+        curr=head;
+        for(i=0;i<(size/2);i++) curr=curr->next;
+        while(curr){
+            st.push(curr);
+            curr=curr->next;
+        }
+        curr=head;
+        while(!st.empty()){
+            Node *temp=st.top();
+            st.pop();
+            //cout<<curr->data<<" "<<temp->data<<" ";
+            //cout<<curr->next->data<<" "<<temp->data<<" ";
+            temp->next=curr->next;
+            curr->next=temp;
+            curr=temp->next;
+        }
+    }
 };
 void test1(){
     cout<<"**********TEST 1**********\n";
@@ -189,9 +217,21 @@ void test3(){
     obj.reverse();
     obj.print();
 }
+void test4(){
+    cout<<"\n**********TEST 4**********\n";
+    SLL obj;
+    obj.push_back(1);
+    obj.push_back(2);
+    obj.push_back(3);
+    obj.push_back(4);
+    obj.print();
+    obj.doAlt();
+    obj.print();
+}
 int main(int argc, char const *argv[]) {
-    test1();
-    test2();
-    test3();
+//    test1();
+//    test2();
+//    test3();
+    test4();
     return 0;
 }
