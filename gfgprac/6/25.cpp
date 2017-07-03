@@ -2,13 +2,12 @@
 #include <string>
 #include <vector>
 #include <algorithm>
+#include <map>
 using namespace std;
-int find(std::vector<char> v,char c){
-	int index=-1;
+void rinse(std::vector<char>&v,int mp[]){
 	for(int i=0;i<v.size();i++){
-		if(v[i]==c){index=i;break;}
+		if(mp[v[i]]>1) v.erase(v.begin()+i);
 	}
-	return index;
 }
 int main(int argc, char const *argv[]){
 	int t;
@@ -17,20 +16,23 @@ int main(int argc, char const *argv[]){
 		int n;
 		cin>>n;
 		std::vector<char> v;
-		string ans="-1";
+		char ans='0';
 		int mp[256]={0};
 		char c;
 		for(int i=0;i<n;i++){
 			cin>>c;
 			mp[c]++;
-			if(i==0){ans=c;cout<<ans<<" ";mp[c]++;continue;}
 			if(mp[c]==1) v.push_back(c);
-
-			if(mp[c]!=1){
-				
+			rinse(v,mp);
+			if(ans=='0' && v.size()==0){cout<<"-1 ";continue;}
+			if(ans=='0') ans = v.front();
+			else if(mp[ans]>1){
+				v.erase(v.begin());
+				if(v.size()==0) ans='0';
+				else ans=v.front();
 			}
-			cout<<ans<<' ';
-
+			if(ans=='0') cout<<"-1"<<" ";
+			else cout<<ans<<" ";
 		}
 		cout<<endl;
 	}
