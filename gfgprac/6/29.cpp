@@ -19,13 +19,27 @@ int getPalin(string str){
 	}
 	return f(str,0,str.length()-1,dp);
 }
+int it(string str){
+	int dp[str.length()+1][str.length()+1];
+	for(int i=0;i<str.length();i++) dp[i][i]=1;
+
+	for(int i=2;i<str.length();i++){
+		for(int j=0;j<(str.length()-i)+1;j++){
+			int x=i+j-1;
+			if(str[i]==str[x]&&i==2) dp[i][j]=2;
+			else if(str[i]==str[x]) dp[i][j]=2+dp[i+1][j-1];
+			else dp[i][j]=max(dp[i][j-1],dp[i+1][j]);
+		}
+	}
+	return dp[0][str.length()-1];
+}
 int main(int argc, char const *argv[]){
 	int t;
 	cin>>t;
 	while(t--){
 		string str;
 		cin>>str;
-		cout<<getPalin(str)<<endl;
+		cout<<it(str)<<endl;
 	}
 	return 0;
 }
