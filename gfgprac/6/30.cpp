@@ -5,35 +5,35 @@
 using namespace std;
 int sum=0;
 void f(int x,int y,int z,int num){
-	if(!x&&!y&&!z) return;
+	if(!x&&!y&&!z) {return;}
+	int nx=num;
+	int ny=num;
+	int nz=num;
 	if(x){
-		num=(num*10)+4;
-		sum+=num;
-		f(x-1,y,z,num);
+		nx=(nx*10)+4;
+		sum+=nx;
+		f(x-1,y,z,nx);
 	}
 	if(y){
-		num=(num*10)+5;
-		sum+=num;
-		f(x,y-1,z,num);
+		ny=(ny*10)+5;
+		sum+=ny;
+		f(x,y-1,z,ny);
 	}
 	if(z){
-		num=(num*10)+6;
-		sum+=num;
-		f(x,y,z-1,num);
+		nz=(nz*10)+6;
+		sum+=nz;
+		f(x,y,z-1,nz);
 	}
 }
 int main(int argc, char const *argv[]){
 	int t;
 	cin>>t;
 	while(t--){
-		int n;
-		cin>>n;
 		int num_4,num_5,num_6;
 		cin>>num_4>>num_5>>num_6;
 		sum=0;
-		f(num_4-1,num_5,num_6,4);
-		f(num_4,num_5-1,num_6,5);
-		f(num_4,num_5,num_6-1,6);
+		f(num_4,num_5,num_6,0);
+		cout<<sum<<endl;
 	}
 	return 0;
 }
