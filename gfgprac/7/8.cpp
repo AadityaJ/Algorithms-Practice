@@ -3,18 +3,27 @@
 #include <vector>
 #include <algorithm>
 #include <vector>
-#include <cmath>
 using namespace std;
-int main(int argc, char const *argv[]){
-	int t;
-	cin>>t;
-	while(t--){
-		long long int n;
-		cin>>n;
-		//unsigned int a=INT_MAX;
-		long long int x=pow(2,31);
-
-		cout<<(x^n)<<endl;
+class A{
+public:
+	A(){
+		cout<<"A created"<<endl;
 	}
+	~A(){
+		cout<<"A dead"<<endl;
+	}
+};
+class B: public A{
+public:
+	B(){
+		cout<<"B created"<<endl;
+	}
+	~B(){
+		cout<<"B dead"<<endl;
+	}
+};
+int main(int argc, char const *argv[]){
+	B *b=new B();
+	delete b;
 	return 0;
 }
