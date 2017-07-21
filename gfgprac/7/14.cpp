@@ -16,8 +16,8 @@ void trav(int a[][4],int n,int m){
 		}
 		m--;
 		if(k<n){
-			for(int i=m;i>=0;i--){
-				cout<<a[n-1][i-1]<<" ";
+			for(int i=m-1;i>=l;i--){
+				cout<<a[n-1][i]<<" ";
 			}
 			n--;
 		}
