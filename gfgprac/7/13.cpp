@@ -40,9 +40,10 @@ int main(int argc, char const *argv[]){
 		}
 		int x,y;
 		cin>>x>>y;
-		int x=minPath(g,n,m,x,y);
-		if(x==INT_MAX) cout<<"-1\n";
-		else cout<<x<<endl;
+		if(!g[x][y]){cout<<"-1\n";continue;}
+		int vv=minPath(g,n,m,x,y);
+		if(vv==INT_MAX) cout<<"-1\n";
+		else cout<<vv<<endl;
 	}
 	return 0;
 }
