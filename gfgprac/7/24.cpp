@@ -11,7 +11,7 @@ int cva(string str1,string str2){
 	int i=0;
 	int c=0;
 	int x=0;
-	for(int i=0;i<min(str1.length(),str2.length());i++){
+	for(i=0;i<min(str1.length(),str2.length());i++){
 		int s=(str1[i]-'0')+(str2[i]-'0')+c;
 		x+=s/10;
 		c=s/10;
@@ -36,7 +36,6 @@ int main(int argc, char const *argv[]){
 	while(t--){
 		string str1,str2;
 		cin>>str1>>str2;
-
 		cout<<cva(str1,str2)<<endl;
 	}
 	return 0;
