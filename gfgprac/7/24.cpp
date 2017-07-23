@@ -4,15 +4,31 @@
 #include <algorithm>
 #include <vector>
 using namespace std;
-pair<bool,string> changetoNg(string str){
-	bool is=0;
-	string ax="";
-	for(int i=0;i<str.length()-1;i++){
-		if(str[i]=='n' && str[i+1]=='g'){
-			is=1;
-			ax+=
-		}
+int cva(string str1,string str2){
+	reverse(str1.begin(),str1.end());
+	reverse(str2.begin(),str2.end());
+
+	int i=0;
+	int c=0;
+	int x=0;
+	for(int i=0;i<min(str1.length(),str2.length());i++){
+		int s=(str1[i]-'0')+(str2[i]-'0')+c;
+		x+=s/10;
+		c=s/10;
 	}
+	while(i<str1.length()){
+		int s=(str1[i]-'0')+c;
+		x+=s/10;
+		c=s/10;
+		i++;
+	}
+	while(i<str2.length()){
+		int s=(str2[i]-'0')+c;
+		x+=s/10;
+		c=s/10;
+		i++;
+	}
+	return x;
 }
 int main(int argc, char const *argv[]){
 	int t;
@@ -20,9 +36,8 @@ int main(int argc, char const *argv[]){
 	while(t--){
 		string str1,str2;
 		cin>>str1>>str2;
-		bool is_ng_1=changetoNg(str1);
-		bool is_ng_2=changetoNg(str2);
 
+		cout<<cva(str1,str2)<<endl;
 	}
 	return 0;
 }
