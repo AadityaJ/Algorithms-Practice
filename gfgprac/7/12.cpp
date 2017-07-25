@@ -4,7 +4,7 @@
 #include <algorithm>
 #include <vector>
 using namespace std;
-// 1 2 3 . . .
+// 1 2 3 . . 
 class Heap{
 	vector<int> v;
 	int parent(int x){return (x/2);}
