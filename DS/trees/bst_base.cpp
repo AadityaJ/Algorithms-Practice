@@ -13,7 +13,7 @@ struct node{
 class bst_tree{
     node *root;
 public:
-    node *getRoot(){return root;}  //<poor joke> getRoot!=groot </poor joke>
+    node *getRoot(){return root;}
     void inorder(node *);
     void postorder(node *);
     void preorder(node*);
@@ -145,7 +145,7 @@ int bst_tree::findLowesAnces(node *rt,int a,int b){
     }
     if(rt->data<a&&rt->data<b){
         return findLowesAnces(rt->rcl,a,b);
-    }    
+    }
     return root->data;
 }
 int main(int argc, char const *argv[]) {
