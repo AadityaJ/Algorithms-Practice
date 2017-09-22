@@ -27,7 +27,10 @@ class BST{
         return root;
     }
     void __inorder__(Node *root){
-        
+        if(!root) return ;
+        __inorder__(root->left);
+        cout<<root->data<<" ";
+        __inorder__(root->right);
     }
 public:
     BST(){
@@ -39,9 +42,9 @@ public:
         this->size=1;
     }
     void insert(int a){
-        __insert__(this->root,a);
+        this->root=__insert__(this->root,a);
     }
     void inorder(){
-        __inorder__();
+        __inorder__(this->root);
     }
 };
